@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+option go_package = "github.com/girishg4t/grpc-test/launch_grpc/launch";
+
+service LaunchService {
+  rpc GetLaunch (GetLaunchRequest) returns (GetLaunchResponse) {}
+  rpc GetLaunches (GetLaunchesRequest) returns (GetLaunchesResponse) {}   
+}
+
+message Launch {
+  int64 id = 1;
+  bool is_tentative = 2;
+  bool launch_success = 3;
+  bool upcoming = 4;
+  string mission_name = 5;
+ 
+}
+
+message GetLaunchRequest {
+  int64 id = 1; 
+}
+  
+message GetLaunchResponse {
+  Launch launch = 1; 
+}
+
+message GetLaunchesRequest {
+}
+  
+message GetLaunchesResponse {
+  repeated Launch launches = 1; 
+}
