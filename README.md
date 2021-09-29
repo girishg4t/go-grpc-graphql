@@ -23,8 +23,8 @@ Client
 $ export LAUNCH_ADDRESS=localhost:50051
 $ go run launch_client/main.go
 ```
-After running the client you will see the output like this
-Note: some time external service was unable to connect and give error `could not get the launches: rpc error: code = DeadlineExceeded desc = context deadline exceeded`
+After running the client you will see the output like below  
+Note: some time external service was unable to connect and give error `could not get the launches: rpc error: code = DeadlineExceeded desc = context deadline exceeded`  
 
 ```
 2021/09/29 22:55:18 Started Launces
@@ -47,7 +47,7 @@ launch_client_1   | 2021/09/29 17:32:35 Launces: [launch_success:true  mission_n
 launch_client_1   | 2021/09/29 17:32:35 could not get the launch: rpc error: code = DeadlineExceeded desc = context deadline exceeded
 ```
 
-Note: some i am not able to call the service and get out put as, for that you need to try again
+Note: some if you are not able to call the service and get out put as, try again
 ```
 Creating grpc-test_launch_service_1 ... done
 Creating grpc-test_launch_client_1  ... done
