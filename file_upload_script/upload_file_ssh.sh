@@ -1,8 +1,13 @@
 #!/bin/bash
 
-dir="/home/test/go/src/github.com/girishg4t/go-grpc-graphql"
+from_dir="/home/girish/go/src/github.com/girishg4t/go-grpc-graphql"
+to_path="/path/to/whereyouwant/"
 user=$1
 host=$2
+
+declare -a arrFiles
+trap 'echo signal received!; kill "${child_pid}"; wait "${child_pid}"; cleanup' SIGINT
+file_index=0
 
 function set_value 
 {
@@ -15,14 +20,13 @@ function read_value
 
 transferfile()
 {
-    echo 'transferring: ' ${arrFiles[$1]} &
-    scp ${arrFiles[$1]} $user@$host:/path/to/whereyouwant/${arrFiles[$1]}    
+    echo 'transferring: ' ${arrFiles[$1]} &    
+    scp ${arrFiles[$1]} $user@$host:$to_path/${arrFiles[$1]}    
 }
 
-declare -a arrFiles
 store_file_name()
 {
-    target=$dir/$1
+    target=$from_dir/$1
 
     for file in "$target"/*
     do
@@ -31,11 +35,10 @@ store_file_name()
 
 }
 
-trap 'echo signal received!; kill "${child_pid}"; wait "${child_pid}"; cleanup' SIGINT
 store_file_name
 arraylength=${#arrFiles[@]}
-file_index=0
-function execute()
+
+function start()
 {   
     for (( i=0; i<${arraylength}; i++ ));
     do
@@ -53,10 +56,9 @@ cleanup()
   e=$((e+1))
   echo "transfering last file ..."
   transferfile ${e}
-  # Our cleanup code goes here
 }
 
-execute &
+start &
 
 child_pid="$!"
 wait "${child_pid}"
