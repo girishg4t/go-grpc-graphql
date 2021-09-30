@@ -11,6 +11,7 @@ $ protoc --go_out=. --go_opt=paths=source_relative \
 1) Testcases are added in service folder both for client and server  
 2) For mocking the calls `counterfeiter:generate` is added in `launch_grpc\launch_grpc.pb.go` after generation through protoc  
 3) Docker compose file is added for running the application using docker and respective docker files paths are given to create the docker image  
+4) CI pipeline is added to run the unit testcases and build the application     
 
 ## How to run the application 
 
