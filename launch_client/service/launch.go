@@ -13,8 +13,8 @@ type LaunchClient struct {
 }
 
 type ILaunchService interface {
-	GetLaunch(ctx context.Context)
-	GetLaunches(ctx context.Context)
+	GetLaunch(ctx context.Context, id int64) error
+	GetLaunches(ctx context.Context, limit int64) error
 }
 
 // NewLaunchService get new instance of launch client service

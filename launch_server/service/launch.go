@@ -36,7 +36,7 @@ func (s *LaunchServer) GetLaunches(ctx context.Context, in *grpc_srv.GetLaunches
 	req.Var("key", int(in.Limit))
 	var graphqlResponse interface{}
 	if err := s.graphqlClient.Run(context.Background(), req, &graphqlResponse); err != nil {
-		panic(err)
+		return nil, err
 	}
 	var launchpast map[string][]*grpc_srv.Launch
 	bytes, _ := json.Marshal(graphqlResponse)
@@ -61,7 +61,7 @@ func (s *LaunchServer) GetLaunch(ctx context.Context, in *grpc_srv.GetLaunchRequ
 	req.Var("key", int(in.Id))
 	var graphqlResponse interface{}
 	if err := s.graphqlClient.Run(context.Background(), req, &graphqlResponse); err != nil {
-		panic(err)
+		return nil, err
 	}
 	var launchpast map[string]*grpc_srv.Launch
 	bytes, _ := json.Marshal(graphqlResponse)

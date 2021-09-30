@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+  <testsuite name="Launch client" tests="2" failures="0" errors="0" time="0">
+      <testcase name="Notification Check launch Negative: returns error if no launch are set" classname="Launch client" time="0.000181638"></testcase>
+      <testcase name="Notification Check launches Negative: returns error if no launch are set" classname="Launch client" time="1.7302e-05"></testcase>
+  </testsuite>

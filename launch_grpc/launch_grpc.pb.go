@@ -17,6 +17,7 @@ const _ = grpc.SupportPackageIsVersion7
 // LaunchServiceClient is the client API for LaunchService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+//counterfeiter:generate . LaunchServiceClient
 type LaunchServiceClient interface {
 	GetLaunch(ctx context.Context, in *GetLaunchRequest, opts ...grpc.CallOption) (*GetLaunchResponse, error)
 	GetLaunches(ctx context.Context, in *GetLaunchesRequest, opts ...grpc.CallOption) (*GetLaunchesResponse, error)

@@ -7,6 +7,11 @@ $ protoc --go_out=. --go_opt=paths=source_relative \
     launch_grpc/launch.proto
 ```
 
+### Repo details
+1) Testcases are added in service folder both for client and server  
+2) For mocking the calls `counterfeiter:generate` is added in `launch_grpc\launch_grpc.pb.go` after generation through protoc  
+3) Docker compose file is added for running the application using docker and respective docker files paths are given to create the docker image  
+
 ## How to run the application 
 
 ### Locally
@@ -56,3 +61,4 @@ Attaching to grpc-test_launch_service_1, grpc-test_launch_client_1
 launch_service_1  | 2021/09/29 17:32:10 server listening at [::]:50051
 launch_client_1   | 2021/09/29 17:32:12 could not get the launches: rpc error: code = DeadlineExceeded desc = context deadline exceeded
 ```
+
