@@ -21,15 +21,16 @@ $ go run launch_server/main.go
 Client
 ```sh
 $ export LAUNCH_ADDRESS=localhost:50051
-$ go run launch_client/main.go
+$ go run launch_client/main.go 4 2
 ```
 After running the client you will see the output like below  
 Note: some time external service was unable to connect and give error `could not get the launches: rpc error: code = DeadlineExceeded desc = context deadline exceeded`  
 
 ```
-2021/09/29 22:55:18 Started Launces
-2021/09/29 22:55:18 Launces: [launch_success:true  mission_name:"Starlink-15 (v1.0)" launch_success:true  mission_name:"Sentinel-6 Michael Freilich" launch_success:true  mission_name:"Crew-1" launch_success:true  mission_name:"GPS III SV04 (Sacagawea)" launch_success:true  mission_name:"Starlink-14 (v1.0)" launch_success:true  mission_name:"Starlink-13 (v1.0)" mission_name:"Starlink-12 (v1.0)" launch_success:true  mission_name:"Starlink-11 (v1.0)" launch_success:true  mission_name:"SAOCOM 1B, GNOMES-1, Tyvak-0172" launch_success:true  mission_name:"Starlink-10 (v1.0) & SkySat 19-21"]
-2021/09/29 22:55:19 Launces: launch_success:true  mission_name:"Starlink-10 (v1.0) & SkySat 19-21"
+2021/09/30 10:02:14 Started Launces
+2021/09/30 10:02:14 total 4 launches received
+2021/09/30 10:02:14 Launces: [launch_success:true mission_name:"Starlink-15 (v1.0)" launch_success:true mission_name:"Sentinel-6 Michael Freilich" launch_success:true mission_name:"Crew-1" launch_success:true mission_name:"GPS III SV04 (Sacagawea)"]
+2021/09/30 10:02:14 Launce received for id 2 as s: mission_name:"DemoSat"
 ```
 
 ### Using docker-compose

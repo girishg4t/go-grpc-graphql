@@ -3,10 +3,13 @@ package main
 
 import (
 	"context"
+	"flag"
 	"log"
 	"os"
+	"strconv"
 	"time"
 
+	"github.com/girishg4t/grpc-test/launch_client/service"
 	grpc_pb "github.com/girishg4t/grpc-test/launch_grpc"
 	"google.golang.org/grpc"
 )
@@ -17,6 +20,8 @@ var (
 
 func main() {
 	log.Printf("Started Launces")
+
+	flag.Parse()
 	// Set up a connection to the server.
 	conn, err := grpc.Dial(address, grpc.WithInsecure(), grpc.WithBlock())
 	if err != nil {
@@ -26,17 +31,33 @@ func main() {
 
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 	defer cancel()
+	processLaunch(ctx, conn)
+}
+
+func processLaunch(ctx context.Context, conn *grpc.ClientConn) {
 
 	lc := grpc_pb.NewLaunchServiceClient(conn)
-	lr, err := lc.GetLaunches(ctx, &grpc_pb.GetLaunchesRequest{})
-	if err != nil {
-		log.Fatalf("could not get the launches: %v", err)
-	}
-	log.Printf("Launces: %s", lr.Launches)
+	var ls service.ILaunchService
+	srv := service.NewLaunchService(lc, ls)
 
-	launchResp, err := lc.GetLaunch(ctx, &grpc_pb.GetLaunchRequest{Id: int64(100)})
+	limit, err := strconv.ParseInt(flag.Arg(0), 10, 64)
 	if err != nil {
-		log.Fatalf("could not get the launch: %v", err)
+		limit = 5
 	}
-	log.Printf("Launces: %s", launchResp.Launch)
+	err = srv.GetLaunches(ctx, limit)
+
+	if err != nil {
+		log.Fatalf("error in processing launches %v", err)
+	}
+
+	id, err := strconv.ParseInt(flag.Arg(1), 10, 64)
+	if err != nil {
+		id = 1
+	}
+	err = srv.GetLaunch(ctx, id)
+
+	if err != nil {
+		log.Fatalf("error in processing launch %v", err)
+	}
+
 }

@@ -25,6 +25,7 @@ message GetLaunchResponse {
 }
 
 message GetLaunchesRequest {
+  int64 limit = 1;
 }
   
 message GetLaunchesResponse {
